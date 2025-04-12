@@ -53,16 +53,6 @@ def use_settings_server(com_server):
         except Exception as e:
             logging.info(f"Result opened. {e}")
         logging.info(f"Result opened. {res}")
-
-        settings = com_server.getsettings()
-        logging.info("Получены настройки.")
-
-        # Получаем и изменяем значения
-        username = settings #.Get("username")
-        logging.info(f"Текущее имя пользователя: {username}")
-
-        new_username = settings #.Get("username")
-        logging.info(f"Новое имя пользователя: {new_username}")
     except Exception as e:
         logging.error(f"Ошибка при использовании настроек: {e}")
 
