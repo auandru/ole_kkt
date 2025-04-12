@@ -44,8 +44,12 @@ def use_calculator_server(com_server):
 def use_settings_server(com_server):
     try:
         # Получаем настройки с сервера
+        res= None
         logging.info(com_server.version)
-        res = com_server.open()
+        try:
+            res = com_server.open()
+        except Exception as e:
+            logging.info(f"Result opened. {e}")
         logging.info(f"Result opened. {res}")
 
         settings = com_server.getsettings()
