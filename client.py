@@ -47,6 +47,8 @@ def use_settings_server(com_server):
         res= None
         logging.info(com_server.version)
         try:
+            com_server.setmodel("61")
+            com_server.setcomnum("COM31")
             res = com_server.open()
         except Exception as e:
             logging.info(f"Result opened. {e}")
