@@ -15,11 +15,11 @@ logging.basicConfig(
 
 debugging = 1
 
-if debugging:
-    from win32com.server.dispatcher import DefaultDebugDispatcher
-    useDispatcher = DefaultDebugDispatcher
-else:
-    useDispatcher = None
+# if debugging:
+#     from win32com.server.dispatcher import DefaultDebugDispatcher
+#     useDispatcher = DefaultDebugDispatcher
+# else:
+#     useDispatcher = None
 
 class Settings:
     def __init__(self):
