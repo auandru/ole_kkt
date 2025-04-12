@@ -46,8 +46,8 @@ class KktOleServer:
     def setmodel(self, model):
         self.model = model
 
-    def setcomnum(self, number):
-        self.comnum = number
+    def setcomnum(self, com_number):
+        self.comnum = com_number
 
     def open(self):
         self.o_interfase.set_settings_com(self.model, self.comnum)
