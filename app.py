@@ -62,11 +62,11 @@ class KktOleServer:
 
     def getcalculator(self):
         logging.info("Вызов метода GetCalculator")
-        return win32com.server.util.wrap(self._calculator)
+        return self._calculator
 
     def getsettings(self):
         logging.info("Вызов метода GetSettings")
-        return win32com.server.util.wrap(self._settings)
+        return self._settings
 
 
 if __name__ == "__main__":
