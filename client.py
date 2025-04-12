@@ -45,6 +45,8 @@ def use_settings_server(com_server):
     try:
         # Получаем настройки с сервера
         logging.info(com_server.version)
+        res = com_server.open()
+        logging.info(f"Result opened. {res}")
 
         settings = com_server.getsettings()
         logging.info("Получены настройки.")
