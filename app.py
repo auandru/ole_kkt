@@ -3,6 +3,7 @@ import sys
 import pythoncom
 import win32com.server.policy
 import logging
+from engineatol import OIFptr
 
 logging.basicConfig(
     level=logging.DEBUG,  # Уровень логирования (DEBUG для подробных сообщений)
@@ -28,6 +29,7 @@ class Settings:
             "mode": "standard",
             "version": "1.0"
         }
+
 
     # def Get(self, key):
     #     logging.debug(f"Get Settings: {key}")
@@ -67,8 +69,12 @@ class KktOleServer:
     def __init__(self):
         logging.info("Инициализация COM-сервера KktOleServer")
         # self._calculator = Calculator()
-        self._settings = Settings()
+        self.o_interfase = OIFptr()
         self.version = 0.1
+
+    def open(self):
+        self.o_interfase.set_settings_com("61","COM31")
+        self.serv = self.o_interfase.open()
 
     def getcalculator(self):
         logging.info("Вызов метода GetCalculator")
