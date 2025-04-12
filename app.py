@@ -33,6 +33,7 @@ class KktOleServer:
                         'reportx',
                         'closeshift',
                         'openshift',
+                        'sale',
                         ]
     _public_attrs_ = ['version',
                       ]
@@ -86,6 +87,12 @@ class KktOleServer:
         if not self.o_interfase.isOpened():
             self.o_interfase.open()
         return self.o_interfase.closeShift()
+
+    def sale(self, data):
+        logging.info(data)
+        if not self.o_interfase.isOpened():
+            self.o_interfase.open()
+        return self.o_interfase.sale(data)
 
 
 if __name__ == "__main__":

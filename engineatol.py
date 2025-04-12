@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 from datetime import datetime as datatime
 import logging
 from libfptr10 import IFptr
@@ -74,37 +75,21 @@ class OIFptr(IFptr):
             continue
         return 0
 
-#
-# print(f' Open {datatime.now()}')
-# fptr.open()
-# if not fptr.isOpened():
-#     print("Code", fptr.errorCode())
-#     print("Error:", fptr.errorDescription())
-#     exit(1)
-# print(f' Set param {datatime.now()}')
-# #fptr.setParam(fptr.LIBFPTR_PARAM_DATA_TYPE, fptr.LIBFPTR_DT_STATUS)
-# #fptr.queryData()
-# print(f' Get param {datatime.now()}')
-# fptr.setParam(IFptr.LIBFPTR_PARAM_DATA_TYPE, IFptr.LIBFPTR_DT_MODEL_INFO)
-# fptr.queryData()
-#
-# model           = fptr.getParamInt(IFptr.LIBFPTR_PARAM_MODEL)
-# modelName       = fptr.getParamString(IFptr.LIBFPTR_PARAM_MODEL_NAME)
-# firmwareVersion = fptr.getParamString(IFptr.LIBFPTR_PARAM_UNIT_VERSION)
-# print(f'{model} {modelName} {firmwareVersion}')
-# print(f'{datatime.now()}')
-#
-# fptr.setParam(fptr.LIBFPTR_PARAM_RECEIPT_TYPE, fptr.LIBFPTR_RT_SELL);
-# fptr.openReceipt();
-#
-# fptr.setParam(fptr.LIBFPTR_PARAM_COMMODITY_NAME, 'Tovar')
-# fptr.setParam(fptr.LIBFPTR_PARAM_PRICE, 100)
-# fptr.setParam(fptr.LIBFPTR_PARAM_QUANTITY, 5.15)
-# fptr.setParam(fptr.LIBFPTR_PARAM_TAX_TYPE, fptr.LIBFPTR_TAX_VAT0)
-# fptr.registration()
-#
-# print(f'Closed check - {datatime.now()} {fptr.checkDocumentClosed()}')
-# fptr.logWrite("MyTag", IFptr.LIBFPTR_LOG_DEBUG, "Мое отладочное сообщение")
-# fptr.close()
-#
-# print(f' Close {datatime.now()}')
+    def sale(self, data):
+        try:
+            datasale = json.loads(data)
+        except Exception as e:
+            logging.error(e)
+            return -1
+
+        self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
+        self.openReceipt()
+        for sale in datasale:
+
+            self.setParam(self.LIBFPTR_PARAM_COMMODITY_NAME, sale.get('name'))
+            self.setParam(self.LIBFPTR_PARAM_PRICE, sale.get('price'))
+            self.setParam(self.LIBFPTR_PARAM_QUANTITY, sale.get('quantity'))
+            self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
+            self.registration()
+
+        return self.checkDocumentClosed()
