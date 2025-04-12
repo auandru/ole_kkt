@@ -83,7 +83,7 @@ if __name__ == "__main__":
     if "--register" in sys.argv:
         print("register OLE-сервер...")
         logging.info("Регистрация OLE-сервера...")
-        win32com.server.register.UseCommandLine(KktOleServer, debug=debugging)
+        win32com.server.register.UseCommandLine(KktOleServer)
     elif "--unregister" in sys.argv:
         print("unregister OLE-сервера...")
         win32com.server.register.UnregisterClasses(KktOleServer)
