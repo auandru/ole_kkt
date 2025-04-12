@@ -48,6 +48,31 @@ class OIFptr(IFptr):
         logging.info(f'Method cashIncome result: {res}')
         return res
 
+    def reportX(self):
+        self.setParam(self.LIBFPTR_PARAM_REPORT_TYPE, self.LIBFPTR_RT_X)
+        return self.report()
+
+    def openShift(self):
+        try:
+            # super().operatorLogin()
+            super().openShift()
+            logging.info(f'Method openShift result: ')
+            return self.checkDocumentClosed()
+        except Exception as e:
+            logging.error(f'Error method openShift result: {e}')
+            return -1
+
+    def closeShift(self):
+        self.setParam(self.LIBFPTR_PARAM_REPORT_TYPE, self.LIBFPTR_RT_CLOSE_SHIFT)
+        self.report()
+        return self.checkDocumentClosed()
+
+    def checkDocumentClosed(self):
+        while super().checkDocumentClosed() < 0:
+            # Не удалось проверить состояние документа. Вывести пользователю текст ошибки, попросить устранить неполадку и повторить запрос
+            print(self.errorDescription())
+            continue
+        return 0
 
 #
 # print(f' Open {datatime.now()}')

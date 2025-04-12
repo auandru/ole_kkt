@@ -30,6 +30,9 @@ class KktOleServer:
                         'cashoutcome',
                         'setmodel',
                         'setcomnum',
+                        'reportx',
+                        'closeshift',
+                        'openshift',
                         ]
     _public_attrs_ = ['version',
                       ]
@@ -64,6 +67,25 @@ class KktOleServer:
             self.o_interfase.open()
         return self.o_interfase.cashOutcome(summ)
 
+    def cashoutcome(self, summ):
+        if not self.o_interfase.isOpened():
+            self.o_interfase.open()
+        return self.o_interfase.cashOutcome(summ)
+
+    def reportx(self):
+        if not self.o_interfase.isOpened():
+            self.o_interfase.open()
+        return self.o_interfase.reportX()
+
+    def openshift(self):
+        if not self.o_interfase.isOpened():
+            self.o_interfase.open()
+        return self.o_interfase.openShift()
+
+    def closeshift(self):
+        if not self.o_interfase.isOpened():
+            self.o_interfase.open()
+        return self.o_interfase.closeShift()
 
 
 if __name__ == "__main__":
