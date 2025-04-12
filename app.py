@@ -62,11 +62,11 @@ class KktOleServer:
 
     def getcalculator(self):
         logging.info("Вызов метода GetCalculator")
-        return self._calculator
+        return "self._calculator"
 
     def getsettings(self):
         logging.info("Вызов метода GetSettings")
-        return self._settings
+        return "self._settings"
 
 
 if __name__ == "__main__":
