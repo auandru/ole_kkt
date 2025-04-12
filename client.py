@@ -35,7 +35,7 @@ def use_calculator_server(com_server):
         result_sub = calculator #.Sub(30, 10)
         logging.info(f"Результат вычитания: {result_sub}")
 
-        calculator.StoreInMemory(100)
+        #calculator.StoreInMemory(100)
         memory_value = calculator #.ReadMemory()
         logging.info(f"Значение в памяти: {memory_value}")
     except Exception as e:
@@ -48,11 +48,11 @@ def use_settings_server(com_server):
         logging.info("Получены настройки.")
 
         # Получаем и изменяем значения
-        username = settings.Get("username")
+        username = settings #.Get("username")
         logging.info(f"Текущее имя пользователя: {username}")
 
         settings.Set("username", "new_user")
-        new_username = settings.Get("username")
+        new_username = settings #.Get("username")
         logging.info(f"Новое имя пользователя: {new_username}")
     except Exception as e:
         logging.error(f"Ошибка при использовании настроек: {e}")
