@@ -29,31 +29,31 @@ class Settings:
             "version": "1.0"
         }
 
-    def Get(self, key):
-        logging.debug(f"Get Settings: {key}")
-        return self._values.get(key, f"[{key} not found]")
+    # def Get(self, key):
+    #     logging.debug(f"Get Settings: {key}")
+    #     return self._values.get(key, f"[{key} not found]")
+    #
+    # def Set(self, key, value):
+    #     logging.debug(f"Set Settings: {key} = {value}")
+    #     self._values[key] = value
+    #     return f"[{key}] = {value}"
 
-    def Set(self, key, value):
-        logging.debug(f"Set Settings: {key} = {value}")
-        self._values[key] = value
-        return f"[{key}] = {value}"
-
-class Calculator:
-    def __init__(self):
-        self.memory = 0
-
-    def Add(self, a, b):
-        return a + b
-
-    def Sub(self, a, b):
-        return a - b
-
-    def StoreInMemory(self, value):
-        self.memory = value
-        return "OK"
-
-    def ReadMemory(self):
-        return self.memory
+# class Calculator:
+#     def __init__(self):
+#         self.memory = 0
+#
+#     def Add(self, a, b):
+#         return a + b
+#
+#     def Sub(self, a, b):
+#         return a - b
+#
+#     def StoreInMemory(self, value):
+#         self.memory = value
+#         return "OK"
+#
+#     def ReadMemory(self):
+#         return self.memory
 
 
 class KktOleServer:
@@ -65,7 +65,7 @@ class KktOleServer:
 
     def __init__(self):
         logging.info("Инициализация COM-сервера KktOleServer")
-        self._calculator = Calculator()
+        # self._calculator = Calculator()
         self._settings = Settings()
 
     def getcalculator(self):
