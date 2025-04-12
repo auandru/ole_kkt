@@ -59,7 +59,7 @@ class Settings:
 
 
 class KktOleServer:
-    _public_methods_ = ['getcalculator', 'getsettings, open']
+    _public_methods_ = ['getcalculator', 'getsettings', 'open']
     _public_attrs_ = ['version',]
     _reg_progid_ = "KKT.OleServer"
     _reg_clsid_ = pythoncom.CreateGuid()
