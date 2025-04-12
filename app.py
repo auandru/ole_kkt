@@ -49,7 +49,7 @@ class Calculator:
 
 
 class KktOleServer:
-    _public_methods_ = ['GetCalculator', 'GetSettings']
+    _public_methods_ = ['getcalculator', 'getsettings']
     _reg_progid_ = "KKT.OleServer"
     _reg_clsid_ = "{21C6C83C-FAD7-4CE4-B16A-B5948F492200}"
     _reg_desc_ = "COM server ole KKT"
@@ -60,11 +60,11 @@ class KktOleServer:
         self._calculator = Calculator()
         self._settings = Settings()
 
-    def GetCalculator(self):
+    def getcalculator(self):
         logging.info("Вызов метода GetCalculator")
         return win32com.server.util.wrap(self._calculator)
 
-    def GetSettings(self):
+    def getsettings(self):
         logging.info("Вызов метода GetSettings")
         return win32com.server.util.wrap(self._settings)
 
