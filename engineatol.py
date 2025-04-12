@@ -81,7 +81,7 @@ class OIFptr(IFptr):
             datasale = datasale.get('sales',{})
         except Exception as e:
             logging.error(e)
-            return -1
+            return -5
         self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
         self.openReceipt()
         for sale in datasale:
