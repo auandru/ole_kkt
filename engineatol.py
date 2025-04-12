@@ -89,7 +89,8 @@ class OIFptr(IFptr):
             self.setParam(self.LIBFPTR_PARAM_COMMODITY_NAME, sale.get('name'))
             self.setParam(self.LIBFPTR_PARAM_PRICE, sale.get('price'))
             self.setParam(self.LIBFPTR_PARAM_QUANTITY, sale.get('quantity'))
-            self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
+            # self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
+            self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
             self.registration()
 
         return self.checkDocumentClosed()
