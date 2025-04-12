@@ -53,7 +53,6 @@ def use_settings_server(com_server):
         username = settings #.Get("username")
         logging.info(f"Текущее имя пользователя: {username}")
 
-        settings.Set("username", "new_user")
         new_username = settings #.Get("username")
         logging.info(f"Новое имя пользователя: {new_username}")
     except Exception as e:
