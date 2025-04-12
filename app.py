@@ -13,6 +13,14 @@ logging.basicConfig(
     ]
 )
 
+debugging = 1
+
+if debugging:
+    from win32com.server.dispatcher import DefaultDebugDispatcher
+    useDispatcher = DefaultDebugDispatcher
+else:
+    useDispatcher = None
+
 class Settings:
     def __init__(self):
         self._values = {
@@ -71,10 +79,11 @@ class KktOleServer:
 
 if __name__ == "__main__":
     import win32com.server.register
+
     if "--register" in sys.argv:
         print("register OLE-сервер...")
         logging.info("Регистрация OLE-сервера...")
-        win32com.server.register.UseCommandLine(KktOleServer)
+        win32com.server.register.UseCommandLine(KktOleServer, debug=debugging)
     elif "--unregister" in sys.argv:
         print("unregister OLE-сервера...")
         win32com.server.register.UnregisterClasses(KktOleServer)
