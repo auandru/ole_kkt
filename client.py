@@ -44,6 +44,8 @@ def use_calculator_server(com_server):
 def use_settings_server(com_server):
     try:
         # Получаем настройки с сервера
+        logging.info(com_server)
+
         settings = com_server.getsettings()
         logging.info("Получены настройки.")
 
