@@ -36,10 +36,17 @@ class OIFptr(IFptr):
         return res
 
     def cashIncome(self, value):
-
+        res = None
         self.setParam(self.LIBFPTR_PARAM_SUM, value)
         res = super().cashIncome()
         logging.info(f' Metod cashIncome result: {res}')
+        return res
+
+   def cashOutcome(self, value):
+
+        self.setParam(self.LIBFPTR_PARAM_SUM, value)
+        res = super().cashOutcome()
+        logging.info(f' Metod cashOutcome result: {res}')
         return res
 
 #

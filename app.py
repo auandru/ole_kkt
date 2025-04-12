@@ -27,6 +27,7 @@ else:
 class KktOleServer:
     _public_methods_ = ['open',
                         'cashincome',
+                        'cashoutcome',
                         'setmodel',
                         'setcomnum',
                         ]
@@ -58,14 +59,11 @@ class KktOleServer:
             self.o_interfase.open()
         return self.o_interfase.cashIncome(summ)
 
+    def cashoutcome(self, summ):
+        if not self.o_interfase.isOpened():
+            self.o_interfase.open()
+        return self.o_interfase.cashOutcome(summ)
 
-    def getcalculator(self):
-        logging.info("Вызов метода GetCalculator")
-        return "self._calculator"
-
-    def getsettings(self):
-        logging.info("Вызов метода GetSettings")
-        return "self._settings"
 
 
 if __name__ == "__main__":
