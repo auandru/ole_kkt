@@ -1,7 +1,16 @@
 # -*- coding: utf-8 -*-
-from app import logging
 from datetime import datetime as datatime
+import logging
 from libfptr10 import IFptr
+
+logging.basicConfig(
+    level=logging.DEBUG,  # Уровень логирования (DEBUG для подробных сообщений)
+    format='%(asctime)s - %(levelname)s - %(message)s',  # Формат логов
+    handlers=[
+        logging.FileHandler('com_server.log'),  # Запись в файл com_server.log
+        logging.StreamHandler()  # Печать логов в консоль
+    ]
+)
 
 
 class OIFptr(IFptr):
