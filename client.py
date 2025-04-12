@@ -25,18 +25,18 @@ def connect_to_com_server():
 def use_calculator_server(com_server):
     try:
         # Получаем калькулятор с сервера
-        calculator = com_server.GetCalculator()
+        calculator = com_server.getcalculator()
         logging.info("Получен объект калькулятора.")
 
         # Выполняем операции
-        result_add = calculator.Add(10, 20)
+        result_add = calculator #.Add(10, 20)
         logging.info(f"Результат сложения: {result_add}")
 
-        result_sub = calculator.Sub(30, 10)
+        result_sub = calculator #.Sub(30, 10)
         logging.info(f"Результат вычитания: {result_sub}")
 
         calculator.StoreInMemory(100)
-        memory_value = calculator.ReadMemory()
+        memory_value = calculator #.ReadMemory()
         logging.info(f"Значение в памяти: {memory_value}")
     except Exception as e:
         logging.error(f"Ошибка при использовании калькулятора: {e}")
@@ -44,7 +44,7 @@ def use_calculator_server(com_server):
 def use_settings_server(com_server):
     try:
         # Получаем настройки с сервера
-        settings = com_server.GetSettings()
+        settings = com_server.getsettings()
         logging.info("Получены настройки.")
 
         # Получаем и изменяем значения
