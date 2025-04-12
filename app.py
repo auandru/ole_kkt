@@ -22,44 +22,12 @@ if debugging:
 else:
     useDispatcher = None
 
-class Settings:
-    def __init__(self):
-        self._values = {
-            "username": "admin",
-            "mode": "standard",
-            "version": "1.0"
-        }
-
-
-    # def Get(self, key):
-    #     logging.debug(f"Get Settings: {key}")
-    #     return self._values.get(key, f"[{key} not found]")
-    #
-    # def Set(self, key, value):
-    #     logging.debug(f"Set Settings: {key} = {value}")
-    #     self._values[key] = value
-    #     return f"[{key}] = {value}"
-
-# class Calculator:
-#     def __init__(self):
-#         self.memory = 0
-#
-#     def Add(self, a, b):
-#         return a + b
-#
-#     def Sub(self, a, b):
-#         return a - b
-#
-#     def StoreInMemory(self, value):
-#         self.memory = value
-#         return "OK"
-#
-#     def ReadMemory(self):
-#         return self.memory
 
 
 class KktOleServer:
-    _public_methods_ = ['getcalculator', 'getsettings', 'open']
+    _public_methods_ = ['open',
+                        'cashincome',
+                        ]
     _public_attrs_ = ['version',]
     _reg_progid_ = "KKT.OleServer"
     _reg_clsid_ = pythoncom.CreateGuid()
@@ -75,6 +43,13 @@ class KktOleServer:
     def open(self):
         self.o_interfase.set_settings_com("61","COM31")
         self.serv = self.o_interfase.open()
+        return self.serv
+
+    def cashincome(self, summ):
+        if not self.o_interfase.isOpened():
+            self.open()
+        return self.o_interfase.cashIncome(summ)
+
 
     def getcalculator(self):
         logging.info("Вызов метода GetCalculator")

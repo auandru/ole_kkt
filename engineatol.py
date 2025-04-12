@@ -24,6 +24,13 @@ class OIFptr(IFptr):
         logging.info(f'Open connect result: {res}')
         return res
 
+    def cashIncome(self, value):
+
+        self.setParam(self.LIBFPTR_PARAM_SUM, value)
+        res = super().cashIncome()
+        logging.info(f' Metod cashIncome result: {res}')
+        return res
+
 #
 # print(f' Open {datatime.now()}')
 # fptr.open()
