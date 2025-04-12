@@ -9,14 +9,16 @@ class OIFptr(IFptr):
         super().__init__()
 
     def set_settings_com(self, model:str, com:str, br:str='115200'):
+        try:
+            logging.info(f'Try save setting com:  model{ self.LIBFPTR_MODEL_ATOL_30F}')
+            self.setSingleSetting(self.LIBFPTR_SETTING_MODEL, model)
+            self.setSingleSetting(self.LIBFPTR_SETTING_PORT, str(self.LIBFPTR_PORT_COM))
+            self.setSingleSetting(self.LIBFPTR_SETTING_COM_FILE, com)  # Замените на свой порт
+            self.setSingleSetting(self.LIBFPTR_SETTING_BAUDRATE, br)
 
-        self.setSingleSetting(self.LIBFPTR_SETTING_MODEL, model)
-        self.setSingleSetting(self.LIBFPTR_SETTING_PORT, str(self.LIBFPTR_PORT_COM))
-        self.setSingleSetting(self.LIBFPTR_SETTING_COM_FILE, com)  # Замените на свой порт
-        self.setSingleSetting(self.LIBFPTR_SETTING_BAUDRATE, br)
-
-        self.applySingleSettings()
-
+            self.applySingleSettings()
+        except Exception as e:
+            logging.error(f'Error save setting com: {e}')
 
 
     def open(self):

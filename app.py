@@ -27,8 +27,11 @@ else:
 class KktOleServer:
     _public_methods_ = ['open',
                         'cashincome',
+                        'setmodel',
+                        'setcomnum',
                         ]
-    _public_attrs_ = ['version',]
+    _public_attrs_ = ['version',
+                      ]
     _reg_progid_ = "KKT.OleServer"
     _reg_clsid_ = pythoncom.CreateGuid()
     _reg_desc_ = "COM server ole KKT"
@@ -40,14 +43,19 @@ class KktOleServer:
         self.o_interfase = OIFptr()
         self.version = 0.1
 
+    def setmodel(self, model):
+        self.model = model
+
+    def setcomnum(self, number):
+        self.comnum = number
+
     def open(self):
-        self.o_interfase.set_settings_com("61","COM31")
-        self.serv = self.o_interfase.open()
-        return self.serv
+        self.o_interfase.set_settings_com(self.model, self.comnum)
+        return self.o_interfase.open()
 
     def cashincome(self, summ):
         if not self.o_interfase.isOpened():
-            self.open()
+            self.o_interfase.open()
         return self.o_interfase.cashIncome(summ)
 
 
