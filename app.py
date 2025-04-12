@@ -58,8 +58,9 @@ class Settings:
 
 class KktOleServer:
     _public_methods_ = ['getcalculator', 'getsettings']
+    _public_attrs_ = ['version',]
     _reg_progid_ = "KKT.OleServer"
-    _reg_clsid_ = "{21C6C83C-FAD7-4CE4-B16A-B5948F492200}"
+    _reg_clsid_ = pythoncom.CreateGuid()
     _reg_desc_ = "COM server ole KKT"
     _reg_clsctx_ = pythoncom.CLSCTX_LOCAL_SERVER
 
@@ -67,6 +68,7 @@ class KktOleServer:
         logging.info("Инициализация COM-сервера KktOleServer")
         # self._calculator = Calculator()
         self._settings = Settings()
+        self.version = 0.1
 
     def getcalculator(self):
         logging.info("Вызов метода GetCalculator")
