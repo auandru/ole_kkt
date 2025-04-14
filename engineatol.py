@@ -99,6 +99,7 @@ class OIFptr(IFptr):
             # return self.closeReceipt()
             return  0
 
-        # finally:
-        #     progress.close()
-        #     app.Destroy()
+        finally:
+            progress.close()
+            app.Destroy()
+
