@@ -69,11 +69,12 @@ class OIFptr(IFptr):
         return self.checkDocumentClosed()
 
     def checkDocumentClosed(self):
-        while super().checkDocumentClosed() < 0:
-            # Не удалось проверить состояние документа. Вывести пользователю текст ошибки, попросить устранить неполадку и повторить запрос
-            print(self.errorDescription())
-            continue
-        return 0
+        res = super().checkDocumentClosed()
+        if res < 0:
+            self.txt_errorDescription = self.errorDescription()
+        else:
+            self.txt_errorDescription = ''
+        return res
 
     def sale(self, data):
         try:
@@ -92,5 +93,4 @@ class OIFptr(IFptr):
             # self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
             self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
             self.registration()
-
-        return self.checkDocumentClosed()
+        return self.closeReceipt()

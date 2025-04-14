@@ -94,6 +94,12 @@ class KktOleServer:
             self.o_interfase.open()
         return self.o_interfase.sale(data)
 
+    def checkdocumentclosed(self):
+        return self.o_interfase.checkDocumentClosed()
+
+    def geterrordescription(self):
+        return getattr(self.o_interfase, 'txt_errorDescription', '')
+
 
 if __name__ == "__main__":
     import win32com.server.register
