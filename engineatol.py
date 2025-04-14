@@ -101,4 +101,5 @@ class OIFptr(IFptr):
 
         finally:
             progress.close()
-            self._app.Exit()
+            self._app.MainLoop()
+            del self._app
