@@ -14,10 +14,10 @@ import logging
 # logging.getLogger('').addHandler(console)
 
 logging.basicConfig(
-    level=logging.DEBUG,  # Уровень логирования (DEBUG для подробных сообщений)
+    level=logging.INFO,  # Уровень логирования (DEBUG для подробных сообщений)
     format='%(asctime)s - %(levelname)s - %(message)s',  # Формат логов
     handlers=[
         logging.FileHandler('D:\com_server.log'),  # Запись в файл com_server.log
-        logging.StreamHandler()  # Печать логов в консоль
+        # logging.StreamHandler()  # Печать логов в консоль
     ]
 )
