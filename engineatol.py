@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 from datetime import datetime as datatime
-import logging
+from app import logging
 from numbers import Number
 
 from libfptr10 import IFptr
@@ -11,14 +11,6 @@ import time
 import threading
 import uuid
 
-logging.basicConfig(
-    level=logging.DEBUG,  # Уровень логирования (DEBUG для подробных сообщений)
-    format='%(asctime)s - %(levelname)s - %(message)s',  # Формат логов
-    handlers=[
-        logging.FileHandler('com_server.log'),  # Запись в файл com_server.log
-        logging.StreamHandler()  # Печать логов в консоль
-    ]
-)
 
 def create_uid():
     uid = str(uuid.uuid4())
