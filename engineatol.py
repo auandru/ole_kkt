@@ -96,4 +96,5 @@ class OIFptr(IFptr):
         #     self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
         #     self.registration()
         # return self.closeReceipt()
+        progress.root.destroy()
         return  0
