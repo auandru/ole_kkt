@@ -38,7 +38,7 @@ class KktOleServer:
     _public_attrs_ = ['version',
                       ]
     _reg_progid_ = "KKT.OleServer"
-    _reg_clsid_ = pythoncom.CreateGuid()
+    _reg_clsid_ = "{0F68B601-6C8D-4F53-B9C9-8A1E87BD9A7D}"
     _reg_desc_ = "COM server ole KKT"
     _reg_clsctx_ = pythoncom.CLSCTX_LOCAL_SERVER
 
