@@ -27,6 +27,7 @@ def create_uid():
 class OIFptr(IFptr):
     def __init__(self):
         super().__init__()
+        db.init_db()
 
     def set_settings_com(self, model:str, com:str, br:str='115200'):
         try:
