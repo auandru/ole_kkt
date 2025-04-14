@@ -1,17 +1,17 @@
 import logging
+import sys
 
-LOG_FILE = 'app.log'
+LOG_FILENAME = "app.log"
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
-    filename=LOG_FILE,
-    filemode='a'  # append mode
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILENAME, mode='a', encoding='utf-8'),
+        logging.StreamHandler(sys.stdout)
+    ]
 )
 
-console = logging.StreamHandler()
-console.setFormatter(logging.Formatter('%(levelname)s - %(message)s'))
-logging.getLogger('').addHandler(console)
 
 # logging.basicConfig(
 #     level=logging.INFO,  # Уровень логирования (DEBUG для подробных сообщений)

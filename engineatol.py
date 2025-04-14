@@ -114,4 +114,5 @@ class OIFptr(IFptr):
 
 
     def get_status_sales(self, uid)->Number:
+        logger.info(f"Get status {uid}")
         return db.get_sale(uid)
