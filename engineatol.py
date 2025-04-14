@@ -5,6 +5,7 @@ import logging
 from libfptr10 import IFptr
 from progress_gui import show_progress_window
 import time
+import threading
 
 logging.basicConfig(
     level=logging.DEBUG,  # Уровень логирования (DEBUG для подробных сообщений)
@@ -73,13 +74,7 @@ class OIFptr(IFptr):
     def checkDocumentClosed(self):
         return super().checkDocumentClosed()
 
-    def sale(self, data):
-        try:
-            datasale = json.loads(data)
-            datasale = datasale.get('sales',{})
-        except Exception as e:
-            logging.error(e)
-            return -5
+    def _print_sale(self, datasale):
         self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
         self.openReceipt()
 
@@ -90,15 +85,27 @@ class OIFptr(IFptr):
                 i += 1
                 progress.update(i)
                 time.sleep(0.05)
-            #     self.setParam(self.LIBFPTR_PARAM_COMMODITY_NAME, sale.get('name'))
-            #     self.setParam(self.LIBFPTR_PARAM_PRICE, sale.get('price'))
-            #     self.setParam(self.LIBFPTR_PARAM_QUANTITY, sale.get('quantity'))
-            #     # self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
-            #     self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
-            #     self.registration()
-            # return self.closeReceipt()
-            return 0
+                self.setParam(self.LIBFPTR_PARAM_COMMODITY_NAME, sale.get('name'))
+                self.setParam(self.LIBFPTR_PARAM_PRICE, sale.get('price'))
+                self.setParam(self.LIBFPTR_PARAM_QUANTITY, sale.get('quantity'))
+                # self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
+                self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
+                self.registration()
+            return self.closeReceipt()
         finally:
             progress.close()
             del app
+
+    def sale(self, data):
+        try:
+            datasale = json.loads(data)
+            datasale = datasale.get('sales',{})
+        except Exception as e:
+            logging.error(e)
+            return -5
+
+        thread = threading.Thread(target=self._print_sale, args=(datasale,))
+        thread.daemon = True
+        thread.start()
+        return 0
 
