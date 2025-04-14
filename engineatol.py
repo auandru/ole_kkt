@@ -101,3 +101,4 @@ class OIFptr(IFptr):
 
         finally:
             progress.close()
+            app.Destroy()
