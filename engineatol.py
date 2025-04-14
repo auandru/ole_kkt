@@ -3,7 +3,7 @@ import json
 from datetime import datetime as datatime
 import logging
 from libfptr10 import IFptr
-from progress_gui import show_progress_window
+from progress_gui import ProgressWindow
 import time
 
 logging.basicConfig(
@@ -82,7 +82,7 @@ class OIFptr(IFptr):
             return -5
         self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
         self.openReceipt()
-        progress = show_progress_window()
+        progress = ProgressWindow(max_value=len(datasale))
 
         i = 0
         for sale in datasale:
@@ -96,5 +96,5 @@ class OIFptr(IFptr):
         #     self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
         #     self.registration()
         # return self.closeReceipt()
-        progress.root.destroy()
+        progress.destroy()
         return  0
