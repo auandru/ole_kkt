@@ -4,6 +4,7 @@ import pythoncom
 import win32com.server.policy
 import logging
 from engineatol import OIFptr
+from dbengine import init_db
 
 logging.basicConfig(
     level=logging.DEBUG,  # Уровень логирования (DEBUG для подробных сообщений)
@@ -105,6 +106,12 @@ class KktOleServer:
     def getstatuscheck(self, uid):
         return  self.o_interfase.get_status_sales(uid)
 
+    def initdb(self):
+        try:
+            init_db()
+            logging.info("init db  ok")
+        except Exception as e:
+            logging.info(f"init db {e}")
 
 if __name__ == "__main__":
     import win32com.server.register

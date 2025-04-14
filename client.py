@@ -63,6 +63,6 @@ if __name__ == "__main__":
     if com_server:
         # Используем калькулятор
         #use_calculator_server(com_server)
-
+        com_server.initdb()
         # Используем настройки
-        use_settings_server(com_server)
+        # use_settings_server(com_server)
