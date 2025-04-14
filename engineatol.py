@@ -85,7 +85,7 @@ class OIFptr(IFptr):
     def _print_sale(self, datasale, uid):
         self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
         self.openReceipt()
-
+        db.init_db()
         app, progress = show_progress_window(max_value=len(datasale))
         try:
             i = 0
