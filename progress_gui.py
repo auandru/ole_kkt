@@ -15,7 +15,6 @@ class ProgressDialog(wx.Dialog):
 
     def close(self):
         self.Destroy()
-        wx.GetApp().ExitMainLoop()
 
 def show_progress_window(max_value):
     app = wx.PyApp(False)
