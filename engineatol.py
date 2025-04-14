@@ -15,7 +15,9 @@ import log_config
 logger = logging.getLogger(__name__)
 
 def create_uid():
+
     uid = str(uuid.uuid4())
+    logger.info(f"Create uid {uid}")
     return uid
 
 class OIFptr(IFptr):
@@ -104,7 +106,7 @@ class OIFptr(IFptr):
             datasale = json.loads(data)
             datasale = datasale.get('sales',{})
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
             return -5
         uid = create_uid()
         thread = threading.Thread(target=self._print_sale, args=(datasale,uid))

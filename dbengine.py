@@ -7,6 +7,7 @@ logger = logging.getLogger(__name__)
 DB_FILE = "D:\sales_status.db"
 
 def init_db():
+    logger.info(f" Init DB ")
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.cursor()
         cursor.execute("""
@@ -20,7 +21,7 @@ def init_db():
         conn.commit()
 
 def insert_sale(uid, status, result):
-    logging.info(f"Incert {uid} {status}")
+    logger.info(f"Incert {uid} {status}")
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.cursor()
         cursor.execute("INSERT INTO sales (uid, status, result) VALUES (?, ?, ?)", (uid, status, result))
@@ -33,7 +34,7 @@ def update_sale(uid, status, result):
         conn.commit()
 
 def get_sale(uid):
-    logging.info(f"Get {uid} ")
+    logger.info(f"Get {uid} ")
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM sales WHERE uid=?", (uid,))
