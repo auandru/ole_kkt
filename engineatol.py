@@ -100,6 +100,4 @@ class OIFptr(IFptr):
             return  0
 
         finally:
-            progress.Destroy()
-            app.Exit()  # Завершаем цикл wx.App
-            del app
+            progress.close()
