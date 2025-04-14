@@ -101,4 +101,5 @@ class OIFptr(IFptr):
 
         finally:
             progress.Destroy()
+            app.ExitMainLoop()  # Завершаем цикл wx.App
             del app
