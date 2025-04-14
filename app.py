@@ -39,6 +39,7 @@ class KktOleServer:
                       ]
     _reg_progid_ = "KKT.OleServer"
     _reg_clsid_ = "{0F68B601-6C8D-4F53-B9C9-8A1E87BD9A7D}"
+    _reg_appid_ = "{0F68B601-6C8D-4F53-B9C9-8A1E87BD9A7D}"
     _reg_desc_ = "COM server ole KKT"
     _reg_clsctx_ = pythoncom.CLSCTX_LOCAL_SERVER
 
@@ -98,7 +99,7 @@ class KktOleServer:
         return self.o_interfase.checkDocumentClosed()
 
     def geterrordescription(self):
-        return getattr(self.o_interfase, 'txt_errorDescription', '')
+        return self.o_interfase.errorDescription()
 
 
 if __name__ == "__main__":

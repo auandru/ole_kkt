@@ -3,6 +3,8 @@ import json
 from datetime import datetime as datatime
 import logging
 from libfptr10 import IFptr
+from progress_gui import show_progress_window
+import time
 
 logging.basicConfig(
     level=logging.DEBUG,  # Уровень логирования (DEBUG для подробных сообщений)
@@ -69,12 +71,7 @@ class OIFptr(IFptr):
         return self.checkDocumentClosed()
 
     def checkDocumentClosed(self):
-        res = super().checkDocumentClosed()
-        if res < 0:
-            self.txt_errorDescription = self.errorDescription()
-        else:
-            self.txt_errorDescription = ''
-        return res
+        return super().checkDocumentClosed()
 
     def sale(self, data):
         try:
@@ -85,12 +82,18 @@ class OIFptr(IFptr):
             return -5
         self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
         self.openReceipt()
-        for sale in datasale:
+        progress = show_progress_window()
 
-            self.setParam(self.LIBFPTR_PARAM_COMMODITY_NAME, sale.get('name'))
-            self.setParam(self.LIBFPTR_PARAM_PRICE, sale.get('price'))
-            self.setParam(self.LIBFPTR_PARAM_QUANTITY, sale.get('quantity'))
-            # self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
-            self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
-            self.registration()
-        return self.closeReceipt()
+        i = 0
+        for sale in datasale:
+            i += 1
+            progress.update(i)
+            time.sleep(0.05)
+        #     self.setParam(self.LIBFPTR_PARAM_COMMODITY_NAME, sale.get('name'))
+        #     self.setParam(self.LIBFPTR_PARAM_PRICE, sale.get('price'))
+        #     self.setParam(self.LIBFPTR_PARAM_QUANTITY, sale.get('quantity'))
+        #     # self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
+        #     self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
+        #     self.registration()
+        # return self.closeReceipt()
+        return  0
