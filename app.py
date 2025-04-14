@@ -34,6 +34,7 @@ class KktOleServer:
                         'closeshift',
                         'openshift',
                         'sale',
+                        'getstatuscheck',
                         ]
     _public_attrs_ = ['version',
                       ]
@@ -100,6 +101,9 @@ class KktOleServer:
 
     def geterrordescription(self):
         return self.o_interfase.errorDescription()
+
+    def getstatuscheck(self, uid):
+        return  self.o_interfase.get_status_sales(uid)
 
 
 if __name__ == "__main__":

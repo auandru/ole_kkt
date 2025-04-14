@@ -2,10 +2,14 @@
 import json
 from datetime import datetime as datatime
 import logging
+from numbers import Number
+
 from libfptr10 import IFptr
 from progress_gui import show_progress_window
+import dbengine as db
 import time
 import threading
+import uuid
 
 logging.basicConfig(
     level=logging.DEBUG,  # Уровень логирования (DEBUG для подробных сообщений)
@@ -16,6 +20,9 @@ logging.basicConfig(
     ]
 )
 
+def create_uid():
+    uid = str(uuid.uuid4())
+    return uid
 
 class OIFptr(IFptr):
     def __init__(self):
@@ -74,7 +81,7 @@ class OIFptr(IFptr):
     def checkDocumentClosed(self):
         return super().checkDocumentClosed()
 
-    def _print_sale(self, datasale):
+    def _print_sale(self, datasale, uid):
         self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
         self.openReceipt()
 
@@ -91,7 +98,8 @@ class OIFptr(IFptr):
                 # self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
                 self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
                 self.registration()
-            return self.closeReceipt()
+                res = self.closeReceipt()
+                db.insert_sale(uid,res ,'')
         finally:
             progress.close()
             del app
@@ -103,9 +111,12 @@ class OIFptr(IFptr):
         except Exception as e:
             logging.error(e)
             return -5
-
-        thread = threading.Thread(target=self._print_sale, args=(datasale,))
+        uid = create_uid()
+        thread = threading.Thread(target=self._print_sale, args=(datasale,uid))
         thread.daemon = True
         thread.start()
-        return 0
+        return uid
 
+
+    def get_status_sales(self, uid)->Number:
+        return db.get_sale(uid)
