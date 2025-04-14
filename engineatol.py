@@ -101,5 +101,4 @@ class OIFptr(IFptr):
 
         finally:
             progress.Destroy()
-            app.ExitMainLoop()
-            del app
+            app.close() #.ExitMainLoop()
