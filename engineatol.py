@@ -98,8 +98,8 @@ class OIFptr(IFptr):
             #     self.registration()
             # return self.closeReceipt()
 
-            progress.close()
-            app.Destroy()
+            del progress
+            del app
             return 0
         finally:
             pass
