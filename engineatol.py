@@ -100,6 +100,7 @@ class OIFptr(IFptr):
             return  0
 
         finally:
-            progress.close()
-            app.Destroy()
+            pass
+            # progress.close()
+            # app.Destroy()
 
