@@ -27,19 +27,20 @@
 
 import wx
 
-class ProgressWindow:
+class ProgressDialog(wx.Dialog):
     def __init__(self, max_value):
-        self.app = wx.App(False)
-        self.frame = wx.Frame(None, title="Прогресс", size=(300, 100))
-        panel = wx.Panel(self.frame)
+        super().__init__(None, title="Обработка продажи", size=(300, 100))
+        panel = wx.Panel(self)
         self.gauge = wx.Gauge(panel, range=max_value, size=(250, 25), pos=(20, 20))
-        self.frame.Show()
-        self.frame.Raise()  # На передний план
+        self.Centre()
+        self.Show()
+        self.Raise()
 
     def update(self, value):
         self.gauge.SetValue(value)
-        wx.Yield()  # Обновление GUI
+        wx.Yield()  # Позволяет обновить GUI
 
-    def destroy(self):
-        self.frame.Destroy()
-        self.app.ExitMainLoop()
+def show_progress_window(max_value):
+    app = wx.App(False)
+    dialog = ProgressDialog(max_value)
+    return app, dialog
