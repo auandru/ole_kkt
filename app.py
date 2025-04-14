@@ -36,6 +36,7 @@ class KktOleServer:
                         'openshift',
                         'sale',
                         'getstatuscheck',
+                        'initdb',
                         ]
     _public_attrs_ = ['version',
                       ]
