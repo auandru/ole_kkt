@@ -1,6 +1,6 @@
 import sqlite3
 
-DB_FILE = "sales_status.db"
+DB_FILE = "D:\sales_status.db"
 
 def init_db():
     with sqlite3.connect(DB_FILE) as conn:

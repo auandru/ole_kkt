@@ -10,7 +10,7 @@ logging.basicConfig(
     level=logging.DEBUG,  # Уровень логирования (DEBUG для подробных сообщений)
     format='%(asctime)s - %(levelname)s - %(message)s',  # Формат логов
     handlers=[
-        logging.FileHandler('com_server.log'),  # Запись в файл com_server.log
+        logging.FileHandler('D:\com_server.log'),  # Запись в файл com_server.log
         logging.StreamHandler()  # Печать логов в консоль
     ]
 )
