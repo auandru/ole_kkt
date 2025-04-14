@@ -39,7 +39,9 @@ def get_sale(uid):
         cursor.execute("SELECT * FROM sales WHERE uid=?", (uid,))
         res = cursor.fetchone()
         if res:
+            logger.info(res[2])
             return res[2]  # Индекс 2 — это поле 'status'
+        logger.info(-10)
         return -10
 
 def get_all_sales():
