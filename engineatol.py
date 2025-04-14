@@ -83,7 +83,7 @@ class OIFptr(IFptr):
         self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
         self.openReceipt()
 
-        progress = show_progress_window(max_value=len(datasale))
+        app, progress = show_progress_window(max_value=len(datasale))
         try:
             i = 0
             for sale in datasale:
@@ -101,3 +101,4 @@ class OIFptr(IFptr):
 
         finally:
             progress.close()
+            app = None

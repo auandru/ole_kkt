@@ -20,4 +20,4 @@ class ProgressDialog(wx.Dialog):
 def show_progress_window(max_value):
     app = wx.PyApp(False)
     dialog = ProgressDialog(max_value)
-    return dialog
+    return app, dialog
