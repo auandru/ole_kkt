@@ -2,18 +2,12 @@
 import sys
 import pythoncom
 import win32com.server.policy
-import logging
 from engineatol import OIFptr
 from dbengine import init_db
+import logging
+import log_config
 
-logging.basicConfig(
-    level=logging.DEBUG,  # Уровень логирования (DEBUG для подробных сообщений)
-    format='%(asctime)s - %(levelname)s - %(message)s',  # Формат логов
-    handlers=[
-        logging.FileHandler('D:\com_server.log'),  # Запись в файл com_server.log
-        logging.StreamHandler()  # Печать логов в консоль
-    ]
-)
+logger = logging.getLogger(__name__)
 
 debugging = 1
 

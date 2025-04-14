@@ -1,5 +1,8 @@
 import sqlite3
-from app import logging
+import logging
+import log_config
+
+logger = logging.getLogger(__name__)
 
 DB_FILE = "D:\sales_status.db"
 

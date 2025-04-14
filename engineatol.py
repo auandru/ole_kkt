@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
 from datetime import datetime as datatime
-from app import logging
 from numbers import Number
 
 from libfptr10 import IFptr
@@ -10,7 +9,10 @@ import dbengine as db
 import time
 import threading
 import uuid
+import logging
+import log_config
 
+logger = logging.getLogger(__name__)
 
 def create_uid():
     uid = str(uuid.uuid4())
