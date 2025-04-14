@@ -101,4 +101,4 @@ class OIFptr(IFptr):
 
         finally:
             progress.Destroy()
-            app.Destroy()
+            del app
