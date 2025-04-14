@@ -101,4 +101,4 @@ class OIFptr(IFptr):
 
         finally:
             progress.close()
-            app.__del__()
+            app.Exit()
