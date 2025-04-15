@@ -31,6 +31,7 @@ class KktOleServer:
                         'sale',
                         'getstatuscheck',
                         'initdb',
+                        'checkdocumentclosed',
                         ]
     _public_attrs_ = ['version',
                       ]
