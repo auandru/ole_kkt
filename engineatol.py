@@ -117,10 +117,16 @@ class OIFptr(IFptr):
         try:
             datasale = json.loads(data)
             datasale = datasale.get('sales',{})
+            summa = datasale.get('summa')
+            nalbezn = datasale.get('nalbezn')
+            type_sale = datasale.get('type')
         except Exception as e:
             logger.error(e)
             return -5
-        self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
+        if not type_sale:
+            self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
+        else:
+            self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL_RETURN)
         self.openReceipt()
         # app, progress = show_progress_window(max_value=len(datasale))
         i = 0
@@ -133,6 +139,16 @@ class OIFptr(IFptr):
             # self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
             self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
             self.registration()
+        if nalbezn or nalbezn is None :
+            self.setParam(self.LIBFPTR_PARAM_PAYMENT_TYPE, self.LIBFPTR_PT_CASH)
+            self.payment()
+        else:
+            self.setParam(self.LIBFPTR_PARAM_PAYMENT_TYPE, self.LIBFPTR_PT_ELECTRONICALLY)
+            self.payment()
+        if summa:
+            self.setParam(self.LIBFPTR_PARAM_PAYMENT_SUM, summa)
+            self.payment()
+
         return self.closeReceipt()
 
 
