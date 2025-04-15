@@ -117,9 +117,9 @@ class OIFptr(IFptr):
         try:
             datasale = json.loads(data)
             datasale = datasale.get('sales',{})
-            summa = datasale.get('summa')
-            nalbezn = datasale.get('payment_type')
-            sell_type = None #datasale.get('sell_type', None)
+            summa = datasale.get('summa', None)
+            nalbezn = datasale.get('payment_type', None)
+            sell_type = datasale.get('sell_type', None)
         except Exception as e:
             logger.error(e)
             return -5
