@@ -33,6 +33,7 @@ class KktOleServer:
                         'initdb',
                         'checkdocumentclosed',
                         'geterrordescription',
+                        'shiftstate',
                         ]
     _public_attrs_ = ['version',
                       ]
@@ -109,6 +110,10 @@ class KktOleServer:
             logging.info("init db  ok")
         except Exception as e:
             logging.info(f"init db {e}")
+
+    def shiftstate(self):
+        return  self.o_interfase.shiftstate()
+
 
 if __name__ == "__main__":
     import win32com.server.register

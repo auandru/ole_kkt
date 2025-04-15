@@ -135,6 +135,18 @@ class OIFptr(IFptr):
             self.registration()
         return self.closeReceipt()
 
+
+    def shiftstate(self):
+        self.setParam(self.LIBFPTR_PARAM_DATA_TYPE, self.LIBFPTR_DT_SHIFT_STATE)
+        self.queryData()
+
+        state = self.getParamInt(self.LIBFPTR_PARAM_SHIFT_STATE)
+        _number = self.getParamInt(self.LIBFPTR_PARAM_SHIFT_NUMBER)
+        # Тип переменной datetime - datetime.datetime
+        _dateTime = self.getParamDateTime(self.LIBFPTR_PARAM_DATE_TIME)
+        return json.dumps({"state": state, "number": _number, "dateTime": _dateTime})
+
+
 def get_status_sales(self, uid)->Number:
         logger.info(f"Get status {uid}")
         return db.get_sale(uid)
