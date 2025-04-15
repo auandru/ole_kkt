@@ -116,14 +116,15 @@ class OIFptr(IFptr):
     def sale(self, data):
         try:
             datasale = json.loads(data)
+            summa = datasale.get('summa')
+            nalbezn = datasale.get('payment_type')
+            sell_type = datasale.get('sell_type')
             datasale = datasale.get('sales',{})
-            summa = datasale.get('summa', None)
-            nalbezn = datasale.get('payment_type', None)
-            sell_type = datasale.get('sell_type', None)
+
         except Exception as e:
             logger.error(e)
             return -5
-        if sell_type == 2:
+        if sell_type:
             self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL_RETURN)
         else:
             self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
