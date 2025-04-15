@@ -119,14 +119,15 @@ class OIFptr(IFptr):
             datasale = datasale.get('sales',{})
             summa = datasale.get('summa')
             nalbezn = datasale.get('payment_type')
-            sell_type = datasale.get('sell_type')
+            sell_type = datasale.get('sell_type', None)
         except Exception as e:
             logger.error(e)
             return -5
-        if not sell_type:
-            self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
-        else:
+        if sell_type == 2:
             self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL_RETURN)
+        else:
+            self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
+
         self.openReceipt()
         # app, progress = show_progress_window(max_value=len(datasale))
         i = 0
