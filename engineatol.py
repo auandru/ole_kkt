@@ -23,7 +23,6 @@ def create_uid():
 class OIFptr(IFptr):
     def __init__(self):
         super().__init__()
-        db.init_db()
 
     def set_settings_com(self, model:str, com:str, br:str='115200'):
         try:
@@ -101,7 +100,7 @@ class OIFptr(IFptr):
             progress.close()
             del app
 
-    def sale(self, data):
+    def sale_threading(self, data):
         try:
             datasale = json.loads(data)
             datasale = datasale.get('sales',{})
@@ -114,7 +113,28 @@ class OIFptr(IFptr):
         thread.start()
         return uid
 
+    def sale(self, data):
+        try:
+            datasale = json.loads(data)
+            datasale = datasale.get('sales',{})
+        except Exception as e:
+            logger.error(e)
+            return -5
+        self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
+        self.openReceipt()
+        app, progress = show_progress_window(max_value=len(datasale))
+        i = 0
+        for sale in datasale:
+            i += 1
+            progress.update(i)
+            self.setParam(self.LIBFPTR_PARAM_COMMODITY_NAME, sale.get('name'))
+            self.setParam(self.LIBFPTR_PARAM_PRICE, sale.get('price'))
+            self.setParam(self.LIBFPTR_PARAM_QUANTITY, sale.get('quantity'))
+            # self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
+            self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
+            self.registration()
+            return self.closeReceipt()
 
-    def get_status_sales(self, uid)->Number:
+def get_status_sales(self, uid)->Number:
         logger.info(f"Get status {uid}")
         return db.get_sale(uid)
