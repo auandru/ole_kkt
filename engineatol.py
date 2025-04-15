@@ -122,18 +122,18 @@ class OIFptr(IFptr):
             return -5
         self.setParam(self.LIBFPTR_PARAM_RECEIPT_TYPE, self.LIBFPTR_RT_SELL)
         self.openReceipt()
-        app, progress = show_progress_window(max_value=len(datasale))
+        # app, progress = show_progress_window(max_value=len(datasale))
         i = 0
         for sale in datasale:
             i += 1
-            progress.update(i)
+            # progress.update(i)
             self.setParam(self.LIBFPTR_PARAM_COMMODITY_NAME, sale.get('name'))
             self.setParam(self.LIBFPTR_PARAM_PRICE, sale.get('price'))
             self.setParam(self.LIBFPTR_PARAM_QUANTITY, sale.get('quantity'))
             # self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, sale.get('tax'))
             self.setParam(self.LIBFPTR_PARAM_TAX_TYPE, self.LIBFPTR_TAX_NO)
             self.registration()
-            return self.closeReceipt()
+        return self.closeReceipt()
 
 def get_status_sales(self, uid)->Number:
         logger.info(f"Get status {uid}")
