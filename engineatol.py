@@ -119,7 +119,7 @@ class OIFptr(IFptr):
             datasale = datasale.get('sales',{})
             summa = datasale.get('summa')
             nalbezn = datasale.get('payment_type')
-            sell_type = datasale.get('sell_type', None)
+            sell_type = None #datasale.get('sell_type', None)
         except Exception as e:
             logger.error(e)
             return -5
