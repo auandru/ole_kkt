@@ -144,7 +144,8 @@ class OIFptr(IFptr):
         _number = self.getParamInt(self.LIBFPTR_PARAM_SHIFT_NUMBER)
         # Тип переменной datetime - datetime.datetime
         _dateTime = self.getParamDateTime(self.LIBFPTR_PARAM_DATE_TIME)
-        return json.dumps({"state": state, "number": _number, "dateTime": _dateTime})
+        logger.info(json.dumps({"state": state, "number": _number, "dateTime": str(_dateTime)}))
+        return json.dumps({"state": state, "number": _number, "dateTime": str(_dateTime)})
 
 
 def get_status_sales(self, uid)->Number:
