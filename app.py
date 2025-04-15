@@ -32,6 +32,7 @@ class KktOleServer:
                         'getstatuscheck',
                         'initdb',
                         'checkdocumentclosed',
+                        'geterrordescription',
                         ]
     _public_attrs_ = ['version',
                       ]
