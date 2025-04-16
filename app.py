@@ -25,6 +25,8 @@ class KktOleServer:
                         'cashoutcome',
                         'setmodel',
                         'setcomnum',
+                        'setipadress',
+                        'setipport',
                         'reportx',
                         'closeshift',
                         'openshift',
@@ -55,8 +57,17 @@ class KktOleServer:
     def setcomnum(self, com_number):
         self.comnum = com_number
 
-    def open(self):
-        self.o_interfase.set_settings_com(self.model, self.comnum)
+    def setipadress(self, adress):
+        self.ipadress = adress
+
+    def setipport(self, port):
+        self.ipport = port
+
+    def open(self, settingport=None):
+        if settingport:
+            self.o_interfase.set_settings_eth(self.model,self.ipadress, self.ipport)
+        else:
+            self.o_interfase.set_settings_com(self.model, self.comnum)
         return self.o_interfase.open()
 
     def cashincome(self, summ):

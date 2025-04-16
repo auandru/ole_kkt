@@ -36,6 +36,25 @@ class OIFptr(IFptr):
         except Exception as e:
             logger.error(f'Error save setting com: {e}')
 
+    def set_settings_eth(self, model:str, ipadress:str, port:str='19524'):
+        try:
+            logger.info(f'Try save setting ethernet:  model{ model}')
+            # self.setSingleSetting(self.LIBFPTR_SETTING_MODEL, model)
+            # self.setSingleSetting(self.LIBFPTR_SETTING_PORT, str(self.LIBFPTR_PORT_TCPIP))
+            # self.setSingleSetting(self.LIBFPTR_SETTING_IPADDRESS , str(ipadress))
+            # self.setSingleSetting(self.LIBFPTR_SETTING_IPPORT, str(port))
+            #
+            # self.applySingleSettings()
+            settings = {
+                self.LIBFPTR_SETTING_MODEL: model,
+                self.LIBFPTR_SETTING_PORT: self.LIBFPTR_PORT_TCPIP,
+                self.LIBFPTR_SETTING_IPADDRESS: ipadress,
+                self.LIBFPTR_SETTING_IPPORT: port
+            }
+            self.setSettings(settings)
+        except Exception as e:
+            logger.error(f'Error save setting com: {e}')
+
 
     def open(self):
         res = super().open()
